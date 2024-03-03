@@ -16,11 +16,10 @@
             <iframe id="mapFrame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250592.2455357074!2d-74.25987507441943!3d40.69767000571747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3c8e6c3d97803%3A0x5058ea3f9e0dd0c4!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1646398454972!5m2!1sen!2sin" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
         <div class="input-container">
-            <input type="text" id="latitudeInput" placeholder="Enter Latitude" style="width: 80%; font-size: 20px;">
-            <input type="text" id="longitudeInput" placeholder="Enter Longitude" style="width: 80%; font-size: 20px;">
+            <input type="text" id="latitudeInput" placeholder="Enter Latitude">
+            <input type="text" id="longitudeInput" placeholder="Enter Longitude">
+            <button onclick="getGreenScore()">Get Green Score</button>
         </div>
-    
-        <button onclick="getGreenScore()">Get Green Score</button>
         <div id="coordinatesContainer"></div>
         <div id="resultContainer"></div>
     </div>
