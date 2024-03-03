@@ -10,20 +10,28 @@ body {
 
 .header {
     text-align: center;
-     /* Semi-transparent dark green header */
+    /* Semi-transparent dark green header */
     padding: 20px;
 }
 
 .header h1 {
-    font-size: 48px; /* Large font size */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #eef3ef; /* White text color */
+    font-size: 25px; /* Large font size */
+    font-style: oblique;
+    font-weight: 100;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #576459; /* White text color */
+}
+
+.logo {
+    width: 400px; /* Adjust width as needed */
+    height: auto; /* Automatically adjust height to maintain aspect ratio */
 }
 
 .content {
-    margin: 20px auto;
+    margin: 10px auto;
     width: 80%;
     text-align: center;
+    margin-top: 20px; /* Adjust the top margin to leave space for the header */
 }
 
 button {
@@ -36,7 +44,7 @@ button {
     border-radius: 8px;
     transition: background-color 0.3s ease;
     display: block;
-    margin: 0 auto; /* Center button */
+    margin: 20px auto; /* Center button */
 }
 
 button:hover {
