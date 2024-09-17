@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.header {
+    text-align: center;
+    /* Semi-transparent dark green header */
+    padding: 20px;
+}
+
+.header h1 {
+    font-size: 25px; /* Large font size */
+    font-style: oblique;
+    font-weight: 100;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #576459; /* White text color */
+}
+
+.logo {
+    width: 400px; /* Adjust width as needed */
+    height: auto; /* Automatically adjust height to maintain aspect ratio */
+}
+
+.content {
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    margin-top: 20px; /* Adjust the top margin to leave space for the header */
+}
+
+.map-container {
+    margin: 0 auto;
+}
+
+.input-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4caf50; /* Green button */
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto; /* Center button */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+

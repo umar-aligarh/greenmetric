@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Metrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+    <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; left:30%; bottom: 30%; top:30%;width:400px;
+    height: 300px}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="logo" class="logo">
+        <h1>"Your Environment Buddy"</h1>
+    </div>
+    <style>
+        .calculation-box {
+            height: 75px;
+            width: 150px;
+            position: absolute;
+            bottom: 40px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            text-align: center;
+        }
+    
+        p {
+            font-family: 'Open Sans';
+            margin: 0;
+            font-size: 13px;
+        }
+    </style>
+    
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.css" type="text/css">
+    
+    <div class="content">
+        <div class="map-container">
+            <div id="map"></div>
+        <div class="calculation-box">
+        <p>Click the map to draw a polygon.</p>
+        <div id="calculated-area"></div>
+    </div>
+    </div >
+        <div class="input-container">
+            <!-- <input type="text" id="latitudeInput" placeholder="Enter Latitude" >
+            <input type="text" id="longitudeInput" placeholder="Enter Longitude"> -->
+            <button onclick="getGreenScore(longt[0],lati[0])" style="position: absolute;bottom: 0%;left:35%">Generate Green Score</button>
+        </div>
+        <div id="coordinatesContainer"></div>
+        <div id="resultContainer"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function getGreenScore(longt,lati)
+        {
+            window.location=`http://127.0.0.1:5000/calculatescore?lon=${longt}&lat=${lati}`
+            console.log('hi')
+        }
+        mapboxgl.accessToken = '';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+            style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+            center: [78.08, 27.89], // starting position [lng, lat]
+            zoom: 16 // starting zoom
+        });
+        let longt=[]
+        let lati=[]
+        const draw = new MapboxDraw({
+            displayControlsDefault: false,
+            // Select which mapbox-gl-draw control buttons to add to the map.
+            controls: {
+                polygon: true,
+                trash: true
+            },
+            // Set mapbox-gl-draw to draw by default.
+            // The user does not have to click the polygon control button first.
+            defaultMode: 'draw_polygon'
+        });
+        map.addControl(draw);
+    
+        map.on('draw.create', updateArea);
+        map.on('draw.delete', updateArea);
+        map.on('draw.update', updateArea);
+    
+        function updateArea(e) {
+            const data = draw.getAll();
+            const answer = document.getElementById('calculated-area');
+            console.log(e.lngLat)
+            if (data.features.length > 0) {
+                const area = turf.area(data);
+                // Restrict the area to 2 decimal points.
+                const rounded_area = Math.round(area * 100) / 100;
+                answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+            } else {
+                answer.innerHTML = '';
+                if (e.type !== 'draw.delete')
+                    alert('Click the map to draw a polygon.');
+                else
+                {
+                    console.log('deleted')
+                    longt.length=0
+                    lati.length=0
+                    Math.min(...longt)
+                    Math.max(...longt)
+                    Math.min(...lati)
+                    Math.max(...lati)
+                }
+            }
+        }
+            
+        map.on('click', (e) => {
+                console.log(e.lngLat)
+    
+                longt.push(e.lngLat.lng)
+                lati.push(e.lngLat.lat)
+                Math.min(...longt)
+                Math.max(...longt)
+                Math.min(...lati)
+                Math.max(...lati)
+                console.log(Math.min(...longt))
+                console.log(Math.max(...longt))
+                console.log(Math.min(...lati))
+                console.log(Math.max(...lati))
+        });
+    </script>
+</body>
+</html>
+
+
